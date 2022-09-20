@@ -4,14 +4,14 @@ import javax.swing.JOptionPane;
 
 public class Especialidade {
 	
-	//os atributos de uma classe sempre devem ser privados.
+	////os atributos de uma classe sempre devem ser privados.
 	private String nome;
 	private String descricao;
 	
-   //métodos de acesso aos atributos que estão na outra classe
+   //métodos de acesso aos atributos que estão na outra classe set e get
 	
     public void setNome(String nome) {
-    	if(nome.length()>=3) {
+    	if(nome.length()>=3) { //definindo o tamanho do nome
     		this.nome = nome;
     	} else {
     		JOptionPane.showMessageDialog(null, nome + "não é um nome válido \ndeve conter três letras");
