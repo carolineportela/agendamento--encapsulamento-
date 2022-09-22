@@ -4,13 +4,32 @@ import javax.swing.JOptionPane;
 
 public class Especialidade {
 	
-	////os atributos de uma classe sempre devem ser privados.
+	//os atributos de uma classe sempre devem ser privados.
 	private String nome;
 	private String descricao;
 	
-   //métodos de acesso aos atributos que estão na outra classe set e get
 	
-    public void setNome(String nome) {
+	//Construtores da classe
+	public Especialidade (String nome) {
+		this.nome = nome; //forma de quando o objeto especialidade for criado,devemos sempre dar um nome
+		
+		//construtor que exige algo
+	}
+	
+	public Especialidade (String nome , String descricao) {
+		this.nome = nome;
+		this.descricao = descricao;
+		 
+	}
+	
+	public Especialidade (){
+	
+		
+	}
+		
+      //métodos de acesso aos atributos que estão na outra classe set e get	
+       public void setNome(String nome) {
+    	   
     	if(nome.length()>=3) { //definindo o tamanho do nome
     		this.nome = nome;
     	} else {

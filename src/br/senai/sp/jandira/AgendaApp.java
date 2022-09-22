@@ -18,6 +18,13 @@ public class AgendaApp {
 
 	public static void main(String[] args) {
 		
+		
+		
+		
+		
+		
+		
+		
 		Especialidade especialidade1 = new Especialidade();
 		especialidade1.setNome ("Cardiologia");
 		especialidade1.setDescricao ("Cuida do seu coração");
@@ -174,7 +181,7 @@ public class AgendaApp {
 	    System.out.println("Especialidade:" + consulta1.getEspecialidade().getNome());
 	    
 	    
-	    
+	   
 		
 
 		
