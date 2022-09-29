@@ -16,7 +16,7 @@ public class TesteWrappers {
 		Double x =2.9;
 		
 		
-		ArrayList<Especialidade> especialidades = new ArrayList<>();
+		ArrayList<Especialidade> especialidades = new ArrayList<>(); //arraylist usamos para guardar objetos
 		
 		Especialidade e1 = new Especialidade("Cardiologia");
 		e1.setNome("Cardiologia");
@@ -32,7 +32,7 @@ public class TesteWrappers {
 		Especialidade e3 = new Especialidade("Fisioterapia");
 		e3.setDescricao("Descrição da fisioterapia");
 		
-		especialidades.add(e3);
+		especialidades.add(e3);//
 		
 		Especialidade e4 = new Especialidade("Clinico Geral");		
 		e4.setDescricao("Descrição do clinico geral");
