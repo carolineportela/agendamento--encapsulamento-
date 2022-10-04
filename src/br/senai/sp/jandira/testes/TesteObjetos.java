@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import br.senai.sp.jandira.AgendaApp;
+import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.PlanoSaude;
 
@@ -25,21 +26,43 @@ public class TesteObjetos {
         e3.setNome("Qualquer coisa");
         JOptionPane.showMessageDialog(null, e1.getNome());
 
-        Especialidade e4 = new Especialidade("otorrino", "ouvido");
+        Especialidade e4 = new Especialidade("otorrino", "descrição do otorrino");
         
         Especialidade e5 = new Especialidade("testee5");
         e5.setDescricao("Descricao e5");
         
+        //04/06
         
-         //exibir a quantidade de especialidades
-         System.out.println(e1.getContador());
+        EspecialidadeDAO.gravar(e1);
+        EspecialidadeDAO.gravar(e2);
+        System.out.println(EspecialidadeDAO.getEspecialidades().size());
          
-         System.out.println(e1.getCodigo() + "-" + e1.getNome());
-         System.out.println(e2.getCodigo() + "-" + e2.getNome());
-         System.out.println(e3.getCodigo() + "-" + e3.getNome());
-         System.out.println(e4.getCodigo() + "-" + e4.getNome());
-         System.out.println(e5.getCodigo() + "-" + e5.getNome());
-          
+        EspecialidadeDAO.gravar(e3);
+        EspecialidadeDAO.gravar(e4);     
+        System.out.println(EspecialidadeDAO.getEspecialidades().size());
+        
+        System.out.println(EspecialidadeDAO.getEspecialidade(103).getNome());
+        
+        EspecialidadeDAO.excluir(102); //excluindo
+        System.out.println(EspecialidadeDAO.getEspecialidades().size());
+        
+        //Atualizar
+         Especialidade correta = new Especialidade("Dermatologia", "Estuda a doença da pele");
+         correta.setCodigo(e4.getCodigo()); //atualizando/mudando o nome 
+         EspecialidadeDAO.atualizar(correta);
+        
+         System.out.println(EspecialidadeDAO.getEspecialidade(103).getNome());
+         
+        
+
+        //exibir a quantidade de especialidades
+        System.out.println(e1.getContador());
+
+        System.out.println(e1.getCodigo() + "-" + e1.getNome());
+        System.out.println(e2.getCodigo() + "-" + e2.getNome());
+        System.out.println(e3.getCodigo() + "-" + e3.getNome());
+        System.out.println(e4.getCodigo() + "-" + e4.getNome());
+        System.out.println(e5.getCodigo() + "-" + e5.getNome());
 
         ArrayList<Especialidade> especialidades = new ArrayList<>();
         especialidades.add(e1);
@@ -74,7 +97,7 @@ public class TesteObjetos {
         PlanoSaude p1 = new PlanoSaude("Amil");
         PlanoSaude p2 = new PlanoSaude("Notredame");
         PlanoSaude p3 = new PlanoSaude("Bradesco");
-        
+
         ArrayList<PlanoSaude> planos = new ArrayList<>();
         planos.add(p1);
         planos.add(p2);
@@ -96,8 +119,6 @@ public class TesteObjetos {
         AgendaApp.main(args);
 
         System.out.println("---" + PlanoSaude.getQuantidade());
-        
-        
 
     }
 

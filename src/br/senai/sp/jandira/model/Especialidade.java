@@ -8,8 +8,8 @@ public class Especialidade {
    
     private String nome;
     private String descricao;
-    private static int contador = 99;
-    private Integer codigo;
+    private static int contador = 99; 
+    private Integer codigo; 
     
 
     //Construtores da classe
@@ -17,9 +17,9 @@ public class Especialidade {
         this.nome = nome;
         this.contador++;
         this.codigo = contador;
-         //forma de quando o objeto especialidade for criado,devemos sempre dar um nome
-        //construtor que exige algo
-       //add um contator
+       //forma de quando o objeto especialidade for criado,devemos sempre dar um nome
+      //construtor que exige algo
+     //add um contator
     }
 
     public Especialidade(String nome, String descricao) {
@@ -70,10 +70,14 @@ public class Especialidade {
 
     public  int getContador() {
         return contador;
-    }
+    } 
 
     public Integer getCodigo() {
         return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
     
     
