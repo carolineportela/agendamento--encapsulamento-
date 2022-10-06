@@ -12,6 +12,37 @@ import br.senai.sp.jandira.model.PlanoSaude;
 public class TesteObjetos {
 
     public static void main(String[] args) {
+        
+        int [] a = {6,9,87,35,96};
+        int[] b = new int [4];
+        b[0] = 55;
+        b[1] = 55;
+        b[2] = 11;
+        b[3] = 99;
+        
+        int [][] c = { 
+            {4,6,5},
+            {5,9,7},
+            {1,2,3},
+            {5,5,8}
+        }; // Matriz = uma lista de vetores
+        System.out.println(c[2][1]);//mostrar no console o valor 2
+        //do vetor c eu quero a posição dois,deste vetor quero a posição um que é o 2
+        
+        String [][] quitanda = {
+            {"Banana" , "Maça" , "Uva" , "Morango"}, //posição zero
+            {"Alface", "Couve","Pepino", "Salsinha", "Pimentão", "Brocolis"},
+            {"Abacate","Tomate", "Jiló" , "Abobrinha"},
+            
+            };
+        System.out.println(quitanda[1][4]);//imprimindo do vetor 1 a posição 4 que é o Pimentão
+        
+        //int [][][] teste = {{{1,2,3},{4,5,6},{11,11,33}},{{1,1},{9,6,7},{6,2,1,4},{6,444,5,1}},{{1,2,3,6},{5,7,7}
+        
+        
+        
+        
+        System.out.println("---Vetores Aula 06/10---");
 
         Especialidade e1 = new Especialidade("Cardiologia");
         e1.setDescricao("Descricao do cardio");
