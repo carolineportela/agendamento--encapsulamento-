@@ -21,7 +21,7 @@ public class AgendaApp {
     public static void main(String[] args) {
         //06/10
         //Fazendo a tela ser a primeira coisa a aparecer quando executarmos
-        HomeFrame tela = new HomeFrame();
+        HomeFrame tela = new HomeFrame();//criando home frame
         tela.setVisible(true);
         
         
