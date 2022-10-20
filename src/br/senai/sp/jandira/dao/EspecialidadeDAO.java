@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package br.senai.sp.jandira.dao;
 
 import br.senai.sp.jandira.model.Especialidade;
@@ -23,8 +20,8 @@ public class EspecialidadeDAO {
             }
         }
         return null;
-
     }
+    
 
     public static void gravar(Especialidade e) {
         especialidades.add(e); // adicionando as especialidades na arayList Especialidade
@@ -41,9 +38,12 @@ public class EspecialidadeDAO {
    }
        public static void atualizar(Especialidade correta){
            for(Especialidade e : especialidades){
-               if(correta.getCodigo() == e.getCodigo());
-               int posicao = especialidades.indexOf(e);
-               especialidades.set(posicao, correta);
+               if(correta.getCodigo() == e.getCodigo()) {
+                    int posicao = especialidades.indexOf(e);
+                    especialidades.set(posicao, correta);
+                    break;
+               }
+               
                
            }
            

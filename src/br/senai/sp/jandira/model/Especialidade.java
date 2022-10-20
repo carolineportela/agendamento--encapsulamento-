@@ -15,8 +15,7 @@ public class Especialidade {
     //Construtores da classe
     public Especialidade(String nome) {
         this.nome = nome;
-        this.contador++;
-        this.codigo = contador;
+        gerarCodigo();
        //forma de quando o objeto especialidade for criado,devemos sempre dar um nome
       //construtor que exige algo
      //add um contator
@@ -25,19 +24,22 @@ public class Especialidade {
     public Especialidade(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
-        this.contador++;
-        this.codigo = contador;
+        gerarCodigo();
       //exigindo que quando o objeto for criado exiga um nome e uma descrição
      
 
     }
 
     public Especialidade() {
-        this.contador++;
-        this.codigo = contador;
-      //construtor default
+       gerarCodigo();
       
 
+    }
+    
+    private void gerarCodigo(){
+        this.contador++;
+        this.codigo = contador;
+        
     }
 
     //métodos de acesso aos atributos que estão na outra classe set e get

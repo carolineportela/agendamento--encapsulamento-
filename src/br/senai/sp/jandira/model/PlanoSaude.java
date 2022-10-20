@@ -6,17 +6,20 @@ public class PlanoSaude {
 
 	private  String operadora;
 	private String categoria;
-	private String numerodacarteira;
+	private String numero;
 	private LocalDate validade;
-	private static int quantidade;
+	//private static int quantidade;
+        private static int contador = 99; 
+        private Integer codigo; 
 	
-	public PlanoSaude (String operadora){
-		this.operadora = operadora;
-		this.quantidade++;
+	public PlanoSaude (String numero){
+		
+                this.numero = numero;
+		//this.quantidade++;
 		
 	}
 	public PlanoSaude(){
-		this.quantidade++;
+		//this.quantidade++;
 	}
 	
 	
@@ -32,13 +35,17 @@ public class PlanoSaude {
 		this.categoria = categoria;
 	}
 
-	public String getNumerodacarteira() {
-		return numerodacarteira;
-	}
+    public String getNumero() {
+        return numero;
+    }
 
-	public void setNumerodacarteira(String numerodacarteira) {
-		this.numerodacarteira = numerodacarteira;
-	}
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    
+
+	
 
 	public LocalDate getValidade() {
 		return validade;
@@ -51,8 +58,25 @@ public class PlanoSaude {
 	public String getOperadora() {
 		return operadora;
 	}
-	public static  int getQuantidade() {
-		return quantidade;
-	}
+	//Public static  int getQuantidade() {
+		//return quantidade;
+	//}
+
+    public static int getContador() {
+        return contador;
+    }
+
+    public static void setContador(int contador) {
+        PlanoSaude.contador = contador;
+    }
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+        
 	
 }

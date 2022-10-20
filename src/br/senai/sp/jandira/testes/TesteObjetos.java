@@ -145,11 +145,11 @@ public class TesteObjetos {
         PlanoSaude xpt3 = new PlanoSaude();
 
         System.out.println("---------------------");
-        System.out.println("---" + PlanoSaude.getQuantidade());
-
-        AgendaApp.main(args);
-
-        System.out.println("---" + PlanoSaude.getQuantidade());
+//        System.out.println("---" + PlanoSaude.getQuantidade());
+//
+//        AgendaApp.main(args);
+//
+//        System.out.println("---" + PlanoSaude.getQuantidade());
 
     }
 
