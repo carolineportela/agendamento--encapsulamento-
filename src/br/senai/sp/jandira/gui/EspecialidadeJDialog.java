@@ -184,6 +184,9 @@ public class EspecialidadeJDialog extends javax.swing.JDialog {
         dispose();//pra fechar a janela
    }
     
+   
+   
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancelar;

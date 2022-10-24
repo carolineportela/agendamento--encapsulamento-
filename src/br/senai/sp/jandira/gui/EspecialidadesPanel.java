@@ -168,11 +168,10 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
                     JOptionPane.WARNING_MESSAGE);     
         }
         
-//        EspecialidadeJDialog especialidadeDialog = 
-//         new EspecialidadeJDialog(null, true,OperacaoEnum.EDITAR);
-//        //rever
-//        especialidadeDialog.setVisible(true);
-//        preencherTabela();
+        EspecialidadeJDialog especialidadeDialog = 
+        new EspecialidadeJDialog(null, true,OperacaoEnum.EDITAR);
+        especialidadeDialog.setVisible(true);
+        preencherTabela();
     }//GEN-LAST:event_buttonEditarEspecialidadeActionPerformed
 
 

@@ -125,14 +125,14 @@ public class TesteObjetos {
         }
         //criar 3 planos de saúde,armazenar em um ArrayListe exibir o nome da operadora de cada um deles usando o for each
 
-        PlanoSaude p1 = new PlanoSaude("Amil");
-        PlanoSaude p2 = new PlanoSaude("Notredame");
-        PlanoSaude p3 = new PlanoSaude("Bradesco");
+       // PlanoSaude p1 = new PlanoSaude("Amil");
+       // PlanoSaude p2 = new PlanoSaude("Notredame");
+       // PlanoSaude p3 = new PlanoSaude("Bradesco");
 
         ArrayList<PlanoSaude> planos = new ArrayList<>();
-        planos.add(p1);
-        planos.add(p2);
-        planos.add(p3);
+       // planos.add(p1);
+     //   planos.add(p2);
+       // planos.add(p3);
 
         System.out.println("---------------------");
         for (PlanoSaude e : planos) {
@@ -140,9 +140,9 @@ public class TesteObjetos {
             //System.out.println(e.getQuantidade());
         }
 
-        PlanoSaude xpto = new PlanoSaude();
-        PlanoSaude xpt2 = new PlanoSaude();
-        PlanoSaude xpt3 = new PlanoSaude();
+     //   PlanoSaude xpto = new PlanoSaude();
+    //    PlanoSaude xpt2 = new PlanoSaude();
+      //  PlanoSaude xpt3 = new PlanoSaude();
 
         System.out.println("---------------------");
 //        System.out.println("---" + PlanoSaude.getQuantidade());
