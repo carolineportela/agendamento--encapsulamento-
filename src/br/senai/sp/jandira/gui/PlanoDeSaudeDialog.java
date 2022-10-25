@@ -55,9 +55,9 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         labelPlanoDeSaudeAdicionar.setText("Planos de Saúde - " + operacao);
 
         if (operacao == OperacaoEnum.EDITAR) {
-            labelPlanoDeSaudeAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/editar.png")));
+            labelPlanoDeSaudeAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/edit32.png")));
         } else {
-            labelPlanoDeSaudeAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/adicionar.png")));
+            labelPlanoDeSaudeAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/plus32.png")));
         }
 
     }
@@ -245,6 +245,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
    
    private void adicionar (){
        //Criar um objeto Plano De Saude
+       
        PlanoDeSaude novoPlanoDeSaude = new PlanoDeSaude();
        novoPlanoDeSaude.setOperadora(textFieldOperadoraPlano.getText());
        novoPlanoDeSaude.setCategoria(textFieldCategoriaPlano.getText());

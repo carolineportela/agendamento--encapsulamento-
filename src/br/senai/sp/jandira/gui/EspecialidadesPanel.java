@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package br.senai.sp.jandira.gui;
 
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
@@ -155,6 +152,7 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
         EspecialidadeJDialog especialidade = new EspecialidadeJDialog(null, true, OperacaoEnum.ADICIONAR);//criando a tela modal de adicionar especialidades
         especialidade.setVisible(true); //fazendo a tela aparecer quando apertamos o botão adicionar de especialidades
         preencherTabela();
+        //tela de adicionar especialidades
     }//GEN-LAST:event_buttonAdicionarEspecialidadeActionPerformed
 
     private void buttonEditarEspecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarEspecialidadeActionPerformed

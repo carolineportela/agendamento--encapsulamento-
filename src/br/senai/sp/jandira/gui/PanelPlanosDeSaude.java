@@ -1,22 +1,30 @@
-package br.senai.sp.jandira.ui;
+package br.senai.sp.jandira.gui;
 
-import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.dao.PlanosDeSaudeDAO;
-import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.OperacaoEnum;
 import br.senai.sp.jandira.model.PlanoDeSaude;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+
 public class PanelPlanosDeSaude extends javax.swing.JPanel {
 
     private int linha;
     
-    public PanelPlanoDeSaude() {
+    public PanelPlanosDeSaude() {
         initComponents();
-        PlanoDeSaudeDAO.criarListaDePlanoDeSaude();
+        PlanosDeSaudeDAO.criarListaDePlanoDeSaude();
+        ajustarTabela();
         preencherTabela();
+       
     }
+    
+    private int getLinha(){
+        linha = tablePlanosDeSaude.getSelectedRow();
+        return linha;
+    }
+ 
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -76,15 +84,15 @@ public class PanelPlanosDeSaude extends javax.swing.JPanel {
         add(buttonNovoPlanoDeSaude);
         buttonNovoPlanoDeSaude.setBounds(800, 260, 38, 40);
     }// </editor-fold>//GEN-END:initComponents
-     
-     private int getLinha() {
-     linha = tablePlanosDeSaude.getSelectedRow();
-     return linha;
-     }
-      private Integer getCodigo() {
-      String codigoStr = tablePlanoDeSaude.getValueAt(getLinha(), 0).toString();
-      Integer codigo = Integer.valueOf(codigoStr);
-      return codigo;
+//     
+//     private int getLinha() {
+//     linha = tablePlanosDeSaude.getSelectedRow();
+//     return linha;
+//     }
+//      private Integer getCodigo() {
+//      String codigoStr = tablePlanoDeSaude.getValueAt(getLinha(), 0).toString();
+//      Integer codigo = Integer.valueOf(codigoStr);
+//      return codigo;
     
     
     private void buttonExcluirPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPlanoDeSaudeActionPerformed
@@ -98,49 +106,70 @@ public class PanelPlanosDeSaude extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonExcluirPlanoDeSaudeActionPerformed
 
     private void buttonEditarPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarPlanoDeSaudeActionPerformed
-        if(getLinha()!= -1){
-           editarPlanoDeSaude();
+       if(getLinha()!= -1){
+            editarPlanoDeSaude();
         }else{
             JOptionPane.showMessageDialog(
-                this,
-                "Por favor,selecione o Plano  que você deseje editar",
-                "Planos de Saúde",
-                JOptionPane.WARNING_MESSAGE);
+                    this,
+                    "Por favor,selecione o Plano que você deseje editar",
+                    "Planos de Saúde",
+                    JOptionPane.WARNING_MESSAGE);     
         }
-        private void editarPlanoDeSaude(){
-               
-
-     PlanoDeSaude planoDeSaude = PlanoDeSaudeDAO.getPlanoDeSaude(getCodigo());
-
-     PlanoDeSaudeDialog planoDeSaudeDialog = new PlanoDeSaudeDialog(null, true, planoDeSaude, OperacaoEnum.EDITAR);
-
-     planoDeSaudeDialog.setVisible(true);
-     preencherTabela();
-}
         
-        
-
-        
+        PlanoDeSaudeDialog planoDeSaudeDialog = new PlanoDeSaudeDialog(null, true,  OperacaoEnum.EDITAR);
+        planoDeSaudeDialog.setVisible(true);
+        preencherTabela();                 
     }//GEN-LAST:event_buttonEditarPlanoDeSaudeActionPerformed
 
     private void buttonNovoPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNovoPlanoDeSaudeActionPerformed
-       /// EspecialidadeJDialog especialidade = new EspecialidadeJDialog(null, true, OperacaoEnum.ADICIONAR);//criando a tela modal de adicionar especialidades
-       // especialidade.setVisible(true); //fazendo a tela aparecer quando apertamos o botão adicionar de especialidades
-       // preencherTabela();
+        PlanoDeSaudeDialog planoDeSaude = new PlanoDeSaudeDialog(null,
+                true, 
+                OperacaoEnum.ADICIONAR);//criando a tela modal de adicionar os planos
+                planoDeSaude.setVisible(true); //fazendo a tela aparecer quando apertamos o botão adicionar de planos
+        preencherTabela();
     }//GEN-LAST:event_buttonNovoPlanoDeSaudeActionPerformed
     
-    private void editarPlanoDeSaude(){
-           
-           PlanoSaude planoSaude = PlanosDeSaudeDAO.getPlanoSaude(getCodigo());
-           PlanoDeSaudeJDialog planoDeSaudeDialog =
-                   new PlanoDeSaudeJDialog()
-           new EspecialidadeJDialog(null, true,especialidade, OperacaoEnum.EDITAR);
-        
-           especialidadeDialog.setVisible(true);
-           
-           preencherTabela();
-           
+         private void editarPlanoDeSaude(){
+          PlanoDeSaude planoDeSaude = PlanosDeSaudeDAO.getPlanoDeSaude(getCodigo());
+          PlanoDeSaudeDialog planoDeSaudeDialog =
+                  new PlanoDeSaudeDialog(null,
+                          true,
+                         planoDeSaude,
+                          OperacaoEnum.EDITAR);
+           planoDeSaudeDialog.setVisible(true);
+           preencherTabela();   
        }
+    
+    private void excluirPlanoDeSaude(){
+        String codigString = tablePlanosDeSaude.getValueAt(linha, 0).toString();
+        Integer codigo = Integer.valueOf(codigString);
+        
+        
+        int resposta = JOptionPane.showConfirmDialog(
+                this, 
+                "Você confirma a exclusão ?", "Atenção",
+               JOptionPane.YES_NO_OPTION,
+               JOptionPane.QUESTION_MESSAGE); 
+        
+        
+        PlanosDeSaudeDAO.excluir(codigo);
+        if(resposta== 0){
+            PlanosDeSaudeDAO.excluir(getCodigo());
+            preencherTabela();
+        
+        }   
+        
+    }
+    
+    private Integer getCodigo(){
+        String codString = tablePlanosDeSaude.getValueAt(getLinha(), 0).toString();
+        Integer codigo = Integer.valueOf(codString);
+        return codigo;
+        
+    }     
+    
+    
+    
    
         
         
@@ -153,13 +182,26 @@ public class PanelPlanosDeSaude extends javax.swing.JPanel {
     private javax.swing.JTable tablePlanosDeSaude;
     // End of variables declaration//GEN-END:variables
 
+  private void preencherTabela(){
+      tablePlanosDeSaude.setModel(PlanosDeSaudeDAO.getTabelaPlanosDeSaude());
+      ajustarTabela();
       
-        
-        private void preencherTabelaPlanos(){
-            jTablePlanosDeSaude.setModel(PlanosDeSaudeDAO.getPlanosModeL());
-            
-     
+  }
   
-    }
-
+  private void ajustarTabela(){
+      //Impedir o usuario de movimentar as colunas
+       tablePlanosDeSaude.getTableHeader().setReorderingAllowed(false);
+        
+      //bloquear a edição das células da tabela
+       tablePlanosDeSaude.setDefaultEditor(Object.class, null);
+       
+       //Definir a largura das colunas
+        tablePlanosDeSaude.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tablePlanosDeSaude.getColumnModel().getColumn(0).setPreferredWidth(200);
+        tablePlanosDeSaude.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tablePlanosDeSaude.getColumnModel().getColumn(2).setPreferredWidth(255);
+              
+  }
 }
+
+

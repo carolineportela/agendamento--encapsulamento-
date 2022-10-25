@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import br.senai.sp.jandira.AgendaApp;
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
-import br.senai.sp.jandira.model.PlanoSaude;
+//import br.senai.sp.jandira.model.PlanoSaude;
 
 public class TesteObjetos {
 
@@ -129,14 +129,14 @@ public class TesteObjetos {
        // PlanoSaude p2 = new PlanoSaude("Notredame");
        // PlanoSaude p3 = new PlanoSaude("Bradesco");
 
-        ArrayList<PlanoSaude> planos = new ArrayList<>();
+       // ArrayList<PlanoSaude> planos = new ArrayList<>();
        // planos.add(p1);
      //   planos.add(p2);
        // planos.add(p3);
 
         System.out.println("---------------------");
-        for (PlanoSaude e : planos) {
-            System.out.println(e.getOperadora());
+       // for (PlanoSaude e : planos) {
+         //   System.out.println(e.getOperadora());
             //System.out.println(e.getQuantidade());
         }
 
@@ -144,7 +144,7 @@ public class TesteObjetos {
     //    PlanoSaude xpt2 = new PlanoSaude();
       //  PlanoSaude xpt3 = new PlanoSaude();
 
-        System.out.println("---------------------");
+        //System.out.println("---------------------");
 //        System.out.println("---" + PlanoSaude.getQuantidade());
 //
 //        AgendaApp.main(args);
@@ -153,4 +153,4 @@ public class TesteObjetos {
 
     }
 
-}
+//}

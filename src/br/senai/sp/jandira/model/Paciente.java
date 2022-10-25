@@ -9,7 +9,7 @@ public class Paciente {
 	private String rg;
 	private String cpf;
 	private Endereco endereco;     // composição
-	private PlanoSaude planoSaude; // composicao
+	//private PlanoSaude planoSaude; // composicao
 
 	public String getNome() {
 		return nome;
@@ -59,12 +59,12 @@ public class Paciente {
 		this.endereco = endereco;
 	}
 
-	public PlanoSaude getPlanoSaude() {
-		return planoSaude;
-	}
+	//public PlanoSaude getPlanoSaude() {
+	//	return planoSaude;
+	//}
 
-	public void setPlanoSaude(PlanoSaude planoSaude) {
-		this.planoSaude = planoSaude;
-	}
-
+	//public void setPlanoSaude(PlanoSaude planoSaude) {
+		//this.planoSaude = planoSaude;
+	//}
 }
+
