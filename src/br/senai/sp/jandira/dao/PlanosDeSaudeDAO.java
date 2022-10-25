@@ -1,92 +1,100 @@
 package br.senai.sp.jandira.dao;
 
-import br.senai.sp.jandira.model.PlanoSaude;
+import br.senai.sp.jandira.model.PlanoDeSaude;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 public class PlanosDeSaudeDAO {
+    /*
+    Essa classe será responsável pela persistência de dados
+    dos planos de saude, por exemplo, adicionar um novo,
+    excluir um plano de saude, etc.
+     */
+    private static ArrayList<PlanoDeSaude> planosDeSaude = new ArrayList<>();
 
-
-
-
-private static ArrayList<PlanoSaude> planos = new ArrayList<>();
-
-public static ArrayList<PlanoSaude> getPlanos (){
- return planos;
-}
- public static PlanoSaude getPlanoSaude (Integer codigo){
-     for (PlanoSaude p : planos){ // planos esta sendo guardado no p
-         if ( codigo == p.getCodigo()){
-             return p;
-
-         }
-     }
-     return null;
- }
- public static void gravar(PlanoSaude p){
-     planos.add(p); //adicionando os planos na ArrayList PlanoSade
- }
-
- public static void excluir(Integer codigo){
-     for ( PlanoSaude p :planos ){ //excluir um plano de saude
-         if (codigo == p.getCodigo()){
-             planos.remove(p);
-             break;
-         }
-     }
- }
-
- public static void atualizar(PlanoSaude correta){
-     for(PlanoSaude p : planos){
-         if(correta.getCodigo() == p.getCodigo()){
-             int posicao = planos.indexOf(p);
-             planos.set(posicao, correta);
-             break;
-         }
-     }
- }
-
- //Criar lista inicial de Planos De Saúde
-public static void CriarPlanoDeSaude(){
-
-
-     PlanoSaude plano1 = new PlanoSaude("1111-1111",
-             "Bradesco",
-             "Simples");
-
-     PlanoSaude plano2 = new PlanoSaude("2222-2222",
-             "NotreDame Intermédica",
-             "Absoluto");
-
-     PlanoSaude plano3 = new PlanoSaude("3333-3333",
-             "Amil",
-             "Superior");
-
-     PlanoSaude plano4 = new PlanoSaude("4444-4444",
-             "HapVida",
-             "Exclusivo");
-
-        planos.add(plano1);
-        planos.add(plano2);
-        planos.add(plano3);
-        planos.add(plano4);
-}
-    //default tablemodel
-    public static DefaultTableModel getPlanosModeL(){
-        String [] titulos = {"NÚMERO DA CARTEIRA",
-            "OPERADORA",
-            "CATEGORIA"};
-
-        String [][] dados = new String[planos.size()][3];
-         int i =0;
-        for (PlanoSaude p : planos){
-           dados [i][0] = p.getNumero().toString();
-           dados [i][1] = p.getOperadora();
-           dados [i][2] = p.getCategoria();
-           i++;
+    public static void gravar(PlanoDeSaude p) { // CREATE
+        planosDeSaude.add(p);
     }
 
-          DefaultTableModel model = new DefaultTableModel(dados, titulos);
-          return model;
+    public static ArrayList<PlanoDeSaude> getPlanoDeSaude() { // READ
+        return planosDeSaude;
     }
+
+    public static PlanoDeSaude getPlanoDeSaude(Integer codigo) { // READ
+
+            for (PlanoDeSaude p : planosDeSaude) {
+            if (p.getCodigo() == codigo) {
+                return p;
+            }
+
+        }
+
+        return null;
+
+    }
+
+    public static void atualizar(PlanoDeSaude planoDeSaudeAtualizada) { // UPDATE
+
+        for (PlanoDeSaude p : planosDeSaude) {
+            if (p.getNumero() == planoDeSaudeAtualizada.getNumero()) {
+                planosDeSaude.set(planosDeSaude.indexOf(p), planoDeSaudeAtualizada);
+                break;
+            }
+
+        }
+    }
+
+    public static void excluir(Integer codigo) { // DELETE
+
+        for (PlanoDeSaude p : planosDeSaude) {
+            if (p.getCodigo() == codigo) {
+                planosDeSaude.remove(p);
+                break;
+            }
+        }
+
+    }
+    
+    // Criar uma lista inicial de especialidades
+    public static void criarListaDePlanoDeSaude(){
+        PlanoDeSaude p1 = new PlanoDeSaude("158344","Bronze","Amil",LocalDate.of(2025, 10, 15));
+        PlanoDeSaude p2 = new PlanoDeSaude("125312","Ouro","NotreDame",LocalDate.of(2024, 9, 12));
+        PlanoDeSaude p3 = new PlanoDeSaude("147444","Prata","Bradesco",LocalDate.of(2027, 11, 30));
+        PlanoDeSaude p4 = new PlanoDeSaude("178543","Prata","Unimed",LocalDate.of(2029, 7, 5));
+        
+       
+        planosDeSaude.add(p1);
+        planosDeSaude.add(p2);
+        planosDeSaude.add(p3);
+        planosDeSaude.add(p4);
+        
+    }
+
+    public static DefaultTableModel getTabelaPlanosDeSaude() {
+        
+        System.out.println(planosDeSaude.size());
+        
+        String[] titulo = {"CÓDIGO", "NÚMERO", "OPERADORA", "CATEGORIA", "VALIDADE"};
+        String[][] dados = new String[planosDeSaude.size()][5];
+        
+        
+            for(PlanoDeSaude p : planosDeSaude){
+            int i = planosDeSaude.indexOf(p);
+            dados[i][0] = p.getCodigo().toString();
+            dados[i][1] = p.getNumero();
+            dados[i][2] = p.getOperadora();
+            dados[i][3] = p.getCategoria();
+            dados[i][4] = p.getValidade().toString();
+            
+        }
+        
+        return new DefaultTableModel(dados, titulo);
+    }
+    
+
 }
+
+
+
