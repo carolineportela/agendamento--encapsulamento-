@@ -48,7 +48,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         textFieldOperadoraPlano.setText(planoDeSaude.getOperadora());
         textFieldCategoriaPlano.setText(planoDeSaude.getCategoria());
         textFieldNumeroPlano.setText(planoDeSaude.getNumero());
-        textFieldValidadePlano.setText(planoDeSaude.getValidade().toString());
+        textFieldValidadePlano.setText(planoDeSaude.getValidade().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
     private void preencherTitulo() {
@@ -73,13 +73,13 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         labelOperadoraPlano = new javax.swing.JLabel();
         textFieldOperadoraPlano = new javax.swing.JTextField();
         labelCategoriaPlano = new javax.swing.JLabel();
-        textFieldValidadePlano = new javax.swing.JTextField();
         buttonCancelarPlanoDeSaude = new javax.swing.JButton();
         buttonSalvarPlanoDeSaude = new javax.swing.JButton();
         textFieldCategoriaPlano = new javax.swing.JTextField();
         textFieldNumeroPlano = new javax.swing.JTextField();
         labelNumeroPlano = new javax.swing.JLabel();
         labelValidadePlano = new javax.swing.JLabel();
+        textFieldValidadePlano = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -123,14 +123,6 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         panelDetalhesPlanoDeSaude.add(labelCategoriaPlano);
         labelCategoriaPlano.setBounds(30, 170, 160, 16);
 
-        textFieldValidadePlano.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldValidadePlanoActionPerformed(evt);
-            }
-        });
-        panelDetalhesPlanoDeSaude.add(textFieldValidadePlano);
-        textFieldValidadePlano.setBounds(30, 240, 140, 20);
-
         buttonCancelarPlanoDeSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/cancel32.png"))); // NOI18N
         buttonCancelarPlanoDeSaude.setToolTipText("Cancelar");
         buttonCancelarPlanoDeSaude.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -170,6 +162,15 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         labelValidadePlano.setText("Validade do plano:");
         panelDetalhesPlanoDeSaude.add(labelValidadePlano);
         labelValidadePlano.setBounds(30, 220, 150, 16);
+        panelDetalhesPlanoDeSaude.add(textFieldValidadePlano);
+        textFieldValidadePlano.setBounds(30, 240, 64, 22);
+        try{
+            textFieldValidadePlano.setFormatterFactory(new javax.swing.text.
+                DefaultFormatterFactory(new javax.swing.text.MaskFormatter
+                    ("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jPanel1.add(panelDetalhesPlanoDeSaude);
         panelDetalhesPlanoDeSaude.setBounds(20, 100, 590, 280);
@@ -206,10 +207,6 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldOperadoraPlanoActionPerformed
 
-    private void textFieldValidadePlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldValidadePlanoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldValidadePlanoActionPerformed
-
     private void buttonSalvarPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarPlanoDeSaudeActionPerformed
 
         if(operacao == OperacaoEnum.ADICIONAR){
@@ -231,7 +228,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
        planoDeSaude.setOperadora(textFieldOperadoraPlano.getText());
        planoDeSaude.setCategoria(textFieldCategoriaPlano.getText());
        planoDeSaude.setNumero(textFieldNumeroPlano.getText());
-       planoDeSaude.setValidade(LocalDate.parse(textFieldNumeroPlano.getText(), DateTimeFormatter.ISO_DATE));
+       planoDeSaude.setValidade(LocalDate.parse(textFieldValidadePlano.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
        
        PlanosDeSaudeDAO.atualizar(planoDeSaude);
        
@@ -250,7 +247,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
        novoPlanoDeSaude.setOperadora(textFieldOperadoraPlano.getText());
        novoPlanoDeSaude.setCategoria(textFieldCategoriaPlano.getText());
        novoPlanoDeSaude.setNumero(textFieldNumeroPlano.getText());
-       novoPlanoDeSaude.setValidade(LocalDate.parse(textFieldValidadePlano.getText(),DateTimeFormatter.BASIC_ISO_DATE));
+       novoPlanoDeSaude.setValidade(LocalDate.parse(textFieldValidadePlano.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
        
        //Gravar o objeto atráves do DAO.
        PlanosDeSaudeDAO.gravar(novoPlanoDeSaude);
@@ -281,6 +278,6 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     private javax.swing.JTextField textFieldCodigoPlano;
     private javax.swing.JTextField textFieldNumeroPlano;
     private javax.swing.JTextField textFieldOperadoraPlano;
-    private javax.swing.JTextField textFieldValidadePlano;
+    private javax.swing.JFormattedTextField textFieldValidadePlano;
     // End of variables declaration//GEN-END:variables
 }

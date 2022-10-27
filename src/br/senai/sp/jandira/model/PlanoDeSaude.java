@@ -2,6 +2,8 @@ package br.senai.sp.jandira.model;
 
 import java.time.LocalDate;
 
+
+
 public class PlanoDeSaude {
 
 private static int contador = 99;
@@ -13,11 +15,11 @@ private Integer codigo;
 private static int quantidade;
 
     public PlanoDeSaude(String numero, String categoria, String operadora, LocalDate validade) {
-        this.operadora = operadora;
-        this.categoria = categoria;
-        this.numero = numero;
-        this.validade = validade;
-        gerarCodigo();
+            this.operadora = operadora;
+            this.categoria = categoria;
+            this.numero = numero;
+            this.validade = validade;
+            gerarCodigo();
 
     }
 
