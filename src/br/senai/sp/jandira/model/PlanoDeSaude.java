@@ -22,6 +22,15 @@ private static int quantidade;
             gerarCodigo();
 
     }
+    
+     public PlanoDeSaude( Integer codigo,                                                                                                     String numero, String categoria, String operadora, LocalDate validade) {
+            this.operadora = operadora;
+            this.categoria = categoria;
+            this.numero = numero;
+            this.validade = validade;
+            
+
+    }
 
 public PlanoDeSaude(String operadora) {
 	this.operadora = operadora;
@@ -77,4 +86,7 @@ public Integer getCodigo() {
     this.contador++;
     this.codigo = contador;
 }
+     public String getPlanoDeSaudeSeparadaPorPontoEVirgula(){
+       return this.numero + ";" + this.categoria + ";" + this.operadora + ";" + this.validade;
+    }
 }

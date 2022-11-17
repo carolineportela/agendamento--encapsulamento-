@@ -168,7 +168,7 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
         
         EspecialidadeJDialog especialidadeDialog = 
         new EspecialidadeJDialog(null, true,OperacaoEnum.EDITAR);
-        especialidadeDialog.setVisible(true);
+        //especialidadeDialog.setVisible(true);
         preencherTabela();
     }//GEN-LAST:event_buttonEditarEspecialidadeActionPerformed
 
@@ -182,7 +182,7 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void preencherTabela() {
-        jTableEspecialidades.setModel(EspecialidadeDAO.getEspecialidadeModel());
+        jTableEspecialidades.setModel(EspecialidadeDAO.getTabelaEspecialidades());
         ajustarTabela();
      
   

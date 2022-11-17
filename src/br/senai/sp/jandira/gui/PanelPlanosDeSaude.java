@@ -117,8 +117,8 @@ public class PanelPlanosDeSaude extends javax.swing.JPanel {
         }
         
         PlanoDeSaudeDialog planoDeSaudeDialog = new PlanoDeSaudeDialog(null, true,  OperacaoEnum.EDITAR);
-        planoDeSaudeDialog.setVisible(true);
-        preencherTabela();                 
+       // planoDeSaudeDialog.setVisible(true);
+        preencherTabela();
     }//GEN-LAST:event_buttonEditarPlanoDeSaudeActionPerformed
 
     private void buttonNovoPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNovoPlanoDeSaudeActionPerformed
@@ -201,7 +201,7 @@ public class PanelPlanosDeSaude extends javax.swing.JPanel {
         tablePlanosDeSaude.getColumnModel().getColumn(1).setPreferredWidth(150);
         tablePlanosDeSaude.getColumnModel().getColumn(2).setPreferredWidth(330);
         tablePlanosDeSaude.getColumnModel().getColumn(3).setPreferredWidth(150);
-       // tablePlanosDeSaude.getColumnModel().getColumn(4).setPreferredWidth(100);
+        //tablePlanosDeSaude.getColumnModel().getColumn(4).setPreferredWidth(100);
               
   }
 }

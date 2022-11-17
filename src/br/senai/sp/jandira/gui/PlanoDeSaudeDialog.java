@@ -162,6 +162,12 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         labelValidadePlano.setText("Validade do plano:");
         panelDetalhesPlanoDeSaude.add(labelValidadePlano);
         labelValidadePlano.setBounds(30, 220, 150, 16);
+
+        textFieldValidadePlano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldValidadePlanoActionPerformed(evt);
+            }
+        });
         panelDetalhesPlanoDeSaude.add(textFieldValidadePlano);
         textFieldValidadePlano.setBounds(30, 240, 64, 22);
         try{
@@ -196,7 +202,8 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(647, 431));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void textFieldCodigoPlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldCodigoPlanoActionPerformed
@@ -208,12 +215,31 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_textFieldOperadoraPlanoActionPerformed
 
     private void buttonSalvarPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarPlanoDeSaudeActionPerformed
-
-        if(operacao == OperacaoEnum.ADICIONAR){
+          
+        CharSequence s = " ";
+        
+       if(textFieldNumeroPlano.getText().isEmpty()){
+           JOptionPane.showMessageDialog(this, "Por favor,digite o número do plano");
+           textFieldNumeroPlano.requestFocus();       
+        }else if (textFieldOperadoraPlano.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Por favor,digite a operadora do Plano");
+            textFieldOperadoraPlano.requestFocus();
+        }else if (textFieldCategoriaPlano.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Por favor,digite a Categoria do Plano");
+            textFieldCategoriaPlano.requestFocus();
+        }else if (textFieldValidadePlano.getText().contains(s) == true){
+            JOptionPane.showMessageDialog(this, "Por favor,digite a Validade do Plano");
+            textFieldValidadePlano.requestFocus();
+        }else{
+            if(operacao == OperacaoEnum.ADICIONAR){
             adicionar();
         }else{
             editar();
         }
+            
+        }
+           
+        
     }//GEN-LAST:event_buttonSalvarPlanoDeSaudeActionPerformed
 
     private void textFieldCategoriaPlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldCategoriaPlanoActionPerformed
@@ -223,6 +249,10 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     private void buttonCancelarPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarPlanoDeSaudeActionPerformed
         dispose();
     }//GEN-LAST:event_buttonCancelarPlanoDeSaudeActionPerformed
+
+    private void textFieldValidadePlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldValidadePlanoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldValidadePlanoActionPerformed
 
    private void editar(){
        planoDeSaude.setOperadora(textFieldOperadoraPlano.getText());
