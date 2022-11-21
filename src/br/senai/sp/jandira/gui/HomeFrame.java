@@ -1,6 +1,7 @@
 
 package br.senai.sp.jandira.gui;
 
+import br.senai.sp.jandira.dao.MedicosDAO;
 import java.awt.Toolkit;
 import java.util.Locale;
 
@@ -8,6 +9,9 @@ public class HomeFrame extends javax.swing.JFrame {
     
     private EspecialidadesPanel especialidadesPanel; //11/10
     private PanelPlanosDeSaude planoDeSaudePanel;
+    private MedicoPanel medicoPanel;
+    
+    
     private final int POS_X = 17;
     private final int POS_Y = 157;
     private final int LARGURA = 880;
@@ -230,7 +234,12 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAgendaActionPerformed
 
     private void buttonMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMedicosActionPerformed
-        // TODO add your handling code here:
+          medicoPanel.setVisible(true);
+          panelHome.setVisible(false);
+          planoDeSaudePanel.setVisible(false);
+          especialidadesPanel.setVisible(false);
+         
+       
     }//GEN-LAST:event_buttonMedicosActionPerformed
 
     private void buttonPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPacienteActionPerformed
@@ -246,6 +255,7 @@ public class HomeFrame extends javax.swing.JFrame {
        // buttonHome.setBackground(new java.awt.Color(102, 255, 51));
         panelHome.setVisible(true);
         especialidadesPanel.setVisible(false);
+        medicoPanel.setVisible(false);
     }//GEN-LAST:event_buttonHomeActionPerformed
 
     private void buttonEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEspecialidadesActionPerformed
@@ -296,6 +306,12 @@ public class HomeFrame extends javax.swing.JFrame {
          planoDeSaudePanel.setBounds(POS_X, POS_Y, LARGURA, ALTURA);
          getContentPane().add(planoDeSaudePanel);
          planoDeSaudePanel.setVisible(false);
+         
+         medicoPanel = new MedicoPanel();
+         medicoPanel.setBounds(POS_X, POS_Y, LARGURA, ALTURA);
+         getContentPane().add(medicoPanel);
+         medicoPanel.setVisible(false);
+         
     }
 
     

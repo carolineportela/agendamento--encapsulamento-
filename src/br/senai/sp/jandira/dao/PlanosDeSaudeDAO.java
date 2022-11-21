@@ -60,7 +60,7 @@ public class PlanosDeSaudeDAO {
     public static PlanoDeSaude getPlanoDeSaude(Integer codigo) { // READ
 
             for (PlanoDeSaude p : planosDeSaude) {
-            if (p.getCodigo() == codigo) {
+            if (p.getCodigo()== codigo) {
                 return p;
             }
 

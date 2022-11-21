@@ -1,0 +1,310 @@
+
+package br.senai.sp.jandira.gui;
+
+import br.senai.sp.jandira.model.Medico;
+import br.senai.sp.jandira.model.OperacaoEnum;
+
+
+public class MedicoJDialog extends javax.swing.JDialog {
+    
+     private Medico medico;
+    private OperacaoEnum operacao;
+
+    
+    public MedicoJDialog(java.awt.Frame parent, 
+            boolean modal,
+            OperacaoEnum operacao) {
+        
+        super(parent, modal);
+        initComponents();
+        this.operacao = operacao;
+        preencherTitulo();
+    }
+     public MedicoJDialog(
+            java.awt.Frame parent,
+            boolean modal,
+            Medico m,
+            OperacaoEnum operacao) {
+
+        super(parent, modal);
+        initComponents();
+
+        medico = m;
+        this.operacao = operacao;
+
+        preencherFormulario();
+        preencherTitulo();
+    }
+       
+        private void preencherFormulario() {
+
+        textFieldCodigoMedico.setText(medico.getCodigo().toString());
+        textFieldNomeDoMedico.setText(medico.getNome());
+        textFieldCRM.setText(medico.getCrm());
+        textFieldEmail.setText(medico.getEmail());  
+        textFieldTelefone.setText(medico.getTelefone());
+    }
+        
+     
+     
+        private void preencherTitulo() {
+        labelMedicosAdicionar.setText("Medicos - " + operacao);
+
+        if (operacao == OperacaoEnum.EDITAR) {
+            labelMedicosAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/edit32.png")));
+        } else {
+            labelMedicosAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/plus32.png")));
+        }
+
+    }
+   
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        labelMedicosAdicionar = new javax.swing.JLabel();
+        panelDetalhesMedicos = new javax.swing.JPanel();
+        labelCodigoMedico = new javax.swing.JLabel();
+        textFieldCodigoMedico = new javax.swing.JTextField();
+        labelEspecialidadesDosMedicos = new javax.swing.JLabel();
+        labelDataDeNascimento = new javax.swing.JLabel();
+        buttonCancelarMedico = new javax.swing.JButton();
+        buttonSalvarMedico = new javax.swing.JButton();
+        textFieldEmail = new javax.swing.JTextField();
+        textFieldNomeDoMedico = new javax.swing.JTextField();
+        labelNomeDoMedico = new javax.swing.JLabel();
+        labelCRM = new javax.swing.JLabel();
+        labelEmail = new javax.swing.JLabel();
+        textFieldCRM = new javax.swing.JFormattedTextField();
+        labelTelefone = new javax.swing.JLabel();
+        textFieldTelefone = new javax.swing.JTextField();
+        labelListaDeEspecialidades = new javax.swing.JLabel();
+        scrollPaneListaDeEspecialidades = new javax.swing.JScrollPane();
+        jListListaDeEspecialidades = new javax.swing.JList<>();
+        scrollEspecialidadesDosMedicos = new javax.swing.JScrollPane();
+        jListListaEspecialidadesDosMedicos = new javax.swing.JList<>();
+        jFormattedDataDeNascimento = new javax.swing.JFormattedTextField();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setLayout(null);
+
+        labelMedicosAdicionar.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        labelMedicosAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/plus32.png"))); // NOI18N
+        labelMedicosAdicionar.setText(" Médicos - ADICIONAR");
+        jPanel1.add(labelMedicosAdicionar);
+        labelMedicosAdicionar.setBounds(30, 20, 410, 40);
+
+        panelDetalhesMedicos.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalhes dos Médicos"));
+        panelDetalhesMedicos.setLayout(null);
+
+        labelCodigoMedico.setText("Código:");
+        panelDetalhesMedicos.add(labelCodigoMedico);
+        labelCodigoMedico.setBounds(30, 20, 120, 16);
+
+        textFieldCodigoMedico.setEditable(false);
+        textFieldCodigoMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldCodigoMedicoActionPerformed(evt);
+            }
+        });
+        panelDetalhesMedicos.add(textFieldCodigoMedico);
+        textFieldCodigoMedico.setBounds(30, 40, 110, 22);
+
+        labelEspecialidadesDosMedicos.setText(" Especialidades dos Médicos:");
+        panelDetalhesMedicos.add(labelEspecialidadesDosMedicos);
+        labelEspecialidadesDosMedicos.setBounds(220, 140, 160, 16);
+
+        labelDataDeNascimento.setText("Data de Nascimento:");
+        panelDetalhesMedicos.add(labelDataDeNascimento);
+        labelDataDeNascimento.setBounds(460, 80, 110, 16);
+
+        buttonCancelarMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/cancel32.png"))); // NOI18N
+        buttonCancelarMedico.setToolTipText("Cancelar");
+        buttonCancelarMedico.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonCancelarMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelarMedicoActionPerformed(evt);
+            }
+        });
+        panelDetalhesMedicos.add(buttonCancelarMedico);
+        buttonCancelarMedico.setBounds(440, 230, 50, 40);
+
+        buttonSalvarMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/save32_1.png"))); // NOI18N
+        buttonSalvarMedico.setToolTipText("Salvar");
+        buttonSalvarMedico.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonSalvarMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSalvarMedicoActionPerformed(evt);
+            }
+        });
+        panelDetalhesMedicos.add(buttonSalvarMedico);
+        buttonSalvarMedico.setBounds(510, 230, 50, 40);
+
+        textFieldEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldEmailActionPerformed(evt);
+            }
+        });
+        panelDetalhesMedicos.add(textFieldEmail);
+        textFieldEmail.setBounds(200, 100, 240, 20);
+        panelDetalhesMedicos.add(textFieldNomeDoMedico);
+        textFieldNomeDoMedico.setBounds(250, 40, 310, 20);
+
+        labelNomeDoMedico.setText("Nome do Médico:");
+        panelDetalhesMedicos.add(labelNomeDoMedico);
+        labelNomeDoMedico.setBounds(250, 20, 100, 16);
+
+        labelCRM.setText("CRM:");
+        panelDetalhesMedicos.add(labelCRM);
+        labelCRM.setBounds(160, 20, 40, 16);
+
+        labelEmail.setText("Email:");
+        panelDetalhesMedicos.add(labelEmail);
+        labelEmail.setBounds(200, 80, 50, 16);
+
+        textFieldCRM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldCRMActionPerformed(evt);
+            }
+        });
+        panelDetalhesMedicos.add(textFieldCRM);
+        textFieldCRM.setBounds(154, 40, 80, 22);
+        try{
+            textFieldValidadePlano.setFormatterFactory(new javax.swing.text.
+                DefaultFormatterFactory(new javax.swing.text.MaskFormatter
+                    ("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        labelTelefone.setText("Telefone:");
+        panelDetalhesMedicos.add(labelTelefone);
+        labelTelefone.setBounds(30, 80, 120, 16);
+
+        textFieldTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldTelefoneActionPerformed(evt);
+            }
+        });
+        panelDetalhesMedicos.add(textFieldTelefone);
+        textFieldTelefone.setBounds(30, 100, 140, 20);
+
+        labelListaDeEspecialidades.setText("Lista de Especialidades:");
+        panelDetalhesMedicos.add(labelListaDeEspecialidades);
+        labelListaDeEspecialidades.setBounds(30, 140, 130, 16);
+
+        jListListaDeEspecialidades.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        scrollPaneListaDeEspecialidades.setViewportView(jListListaDeEspecialidades);
+
+        panelDetalhesMedicos.add(scrollPaneListaDeEspecialidades);
+        scrollPaneListaDeEspecialidades.setBounds(30, 170, 130, 146);
+
+        jListListaEspecialidadesDosMedicos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        scrollEspecialidadesDosMedicos.setViewportView(jListListaEspecialidadesDosMedicos);
+
+        panelDetalhesMedicos.add(scrollEspecialidadesDosMedicos);
+        scrollEspecialidadesDosMedicos.setBounds(220, 170, 150, 146);
+
+        jFormattedDataDeNascimento.setText("jFormattedTextField1");
+        panelDetalhesMedicos.add(jFormattedDataDeNascimento);
+        jFormattedDataDeNascimento.setBounds(460, 100, 126, 22);
+
+        jPanel1.add(panelDetalhesMedicos);
+        panelDetalhesMedicos.setBounds(20, 100, 640, 330);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        setSize(new java.awt.Dimension(722, 446));
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void textFieldCodigoMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldCodigoMedicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldCodigoMedicoActionPerformed
+
+    private void buttonCancelarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarMedicoActionPerformed
+        dispose();
+    }//GEN-LAST:event_buttonCancelarMedicoActionPerformed
+
+    private void buttonSalvarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarMedicoActionPerformed
+
+        CharSequence s = " ";
+
+       
+    }//GEN-LAST:event_buttonSalvarMedicoActionPerformed
+
+    private void textFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldEmailActionPerformed
+
+    private void textFieldCRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldCRMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldCRMActionPerformed
+
+    private void textFieldTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldTelefoneActionPerformed
+
+     private void editar(){
+     
+   }
+    
+    
+    
+    
+    
+    
+    
+    
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonCancelarMedico;
+    private javax.swing.JButton buttonSalvarMedico;
+    private javax.swing.JFormattedTextField jFormattedDataDeNascimento;
+    private javax.swing.JList<String> jListListaDeEspecialidades;
+    private javax.swing.JList<String> jListListaEspecialidadesDosMedicos;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelCRM;
+    private javax.swing.JLabel labelCodigoMedico;
+    private javax.swing.JLabel labelDataDeNascimento;
+    private javax.swing.JLabel labelEmail;
+    private javax.swing.JLabel labelEspecialidadesDosMedicos;
+    private javax.swing.JLabel labelListaDeEspecialidades;
+    private javax.swing.JLabel labelMedicosAdicionar;
+    private javax.swing.JLabel labelNomeDoMedico;
+    private javax.swing.JLabel labelTelefone;
+    private javax.swing.JPanel panelDetalhesMedicos;
+    private javax.swing.JScrollPane scrollEspecialidadesDosMedicos;
+    private javax.swing.JScrollPane scrollPaneListaDeEspecialidades;
+    private javax.swing.JFormattedTextField textFieldCRM;
+    private javax.swing.JTextField textFieldCodigoMedico;
+    private javax.swing.JTextField textFieldEmail;
+    private javax.swing.JTextField textFieldNomeDoMedico;
+    private javax.swing.JTextField textFieldTelefone;
+    // End of variables declaration//GEN-END:variables
+}
