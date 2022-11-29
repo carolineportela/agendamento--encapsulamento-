@@ -1,8 +1,13 @@
 
 package br.senai.sp.jandira.gui;
 
+import br.senai.sp.jandira.dao.MedicosDAO;
 import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.OperacaoEnum;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 
 public class MedicoJDialog extends javax.swing.JDialog {
@@ -31,7 +36,6 @@ public class MedicoJDialog extends javax.swing.JDialog {
 
         medico = m;
         this.operacao = operacao;
-
         preencherFormulario();
         preencherTitulo();
     }
@@ -43,6 +47,7 @@ public class MedicoJDialog extends javax.swing.JDialog {
         textFieldCRM.setText(medico.getCrm());
         textFieldEmail.setText(medico.getEmail());  
         textFieldTelefone.setText(medico.getTelefone());
+        formattedTextFieldDataDeNascimento.setText(medico.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
         
      
@@ -84,7 +89,7 @@ public class MedicoJDialog extends javax.swing.JDialog {
         jListListaDeEspecialidades = new javax.swing.JList<>();
         scrollEspecialidadesDosMedicos = new javax.swing.JScrollPane();
         jListListaEspecialidadesDosMedicos = new javax.swing.JList<>();
-        jFormattedDataDeNascimento = new javax.swing.JFormattedTextField();
+        formattedTextFieldDataDeNascimento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -171,13 +176,6 @@ public class MedicoJDialog extends javax.swing.JDialog {
         });
         panelDetalhesMedicos.add(textFieldCRM);
         textFieldCRM.setBounds(154, 40, 80, 22);
-        try{
-            textFieldValidadePlano.setFormatterFactory(new javax.swing.text.
-                DefaultFormatterFactory(new javax.swing.text.MaskFormatter
-                    ("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         labelTelefone.setText("Telefone:");
         panelDetalhesMedicos.add(labelTelefone);
@@ -215,32 +213,36 @@ public class MedicoJDialog extends javax.swing.JDialog {
         panelDetalhesMedicos.add(scrollEspecialidadesDosMedicos);
         scrollEspecialidadesDosMedicos.setBounds(220, 170, 150, 146);
 
-        jFormattedDataDeNascimento.setText("jFormattedTextField1");
-        panelDetalhesMedicos.add(jFormattedDataDeNascimento);
-        jFormattedDataDeNascimento.setBounds(460, 100, 126, 22);
+        formattedTextFieldDataDeNascimento.setText("jFormattedTextField1");
+        formattedTextFieldDataDeNascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formattedTextFieldDataDeNascimentoActionPerformed(evt);
+            }
+        });
+        panelDetalhesMedicos.add(formattedTextFieldDataDeNascimento);
+        formattedTextFieldDataDeNascimento.setBounds(460, 100, 126, 22);
+        try {
+            formattedTextFieldDataDeNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                new javax.swing.text.MaskFormatter("##/##/####")));
+    } catch (java.text.ParseException ex) {
+        ex.printStackTrace();}
 
-        jPanel1.add(panelDetalhesMedicos);
-        panelDetalhesMedicos.setBounds(20, 100, 640, 330);
+    jPanel1.add(panelDetalhesMedicos);
+    panelDetalhesMedicos.setBounds(20, 80, 640, 340);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+    );
 
-        setSize(new java.awt.Dimension(722, 446));
-        setLocationRelativeTo(null);
+    setSize(new java.awt.Dimension(722, 446));
+    setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void textFieldCodigoMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldCodigoMedicoActionPerformed
@@ -252,8 +254,12 @@ public class MedicoJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonCancelarMedicoActionPerformed
 
     private void buttonSalvarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarMedicoActionPerformed
-
-        CharSequence s = " ";
+         if(operacao == OperacaoEnum.ADICIONAR) {
+              adicionar();
+          }else{
+              editar();
+          }
+     
 
        
     }//GEN-LAST:event_buttonSalvarMedicoActionPerformed
@@ -270,10 +276,32 @@ public class MedicoJDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldTelefoneActionPerformed
 
+    private void formattedTextFieldDataDeNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formattedTextFieldDataDeNascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formattedTextFieldDataDeNascimentoActionPerformed
+
      private void editar(){
-     
+      medico.setNome(textFieldNomeDoMedico.getText());
+      medico.setCrm(textFieldCRM.getText());
+      medico.setTelefone(textFieldCRM.getText());
+      medico.setEmail(textFieldEmail.getText());  
+      medico.setDataNascimento(LocalDate.parse(formattedTextFieldDataDeNascimento.getText(),DateTimeFormatter.ofPattern("dd/MM/yyyy")));
    }
-    
+    private void adicionar(){
+        Medico novoMedico = new Medico();
+        novoMedico.setNome(textFieldNomeDoMedico.getText());
+        novoMedico.setTelefone(textFieldTelefone.getText());
+        novoMedico.setEmail(textFieldEmail.getText());
+        novoMedico.setCrm(textFieldCRM.getText());
+        MedicosDAO.gravar(novoMedico);
+         JOptionPane.showMessageDialog(this,
+                "Medico gravado com sucesso!",
+                "Medicos",
+                JOptionPane.INFORMATION_MESSAGE);
+        
+        dispose();//pra fechar a janela
+              
+    }
     
     
     
@@ -285,7 +313,7 @@ public class MedicoJDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancelarMedico;
     private javax.swing.JButton buttonSalvarMedico;
-    private javax.swing.JFormattedTextField jFormattedDataDeNascimento;
+    private javax.swing.JFormattedTextField formattedTextFieldDataDeNascimento;
     private javax.swing.JList<String> jListListaDeEspecialidades;
     private javax.swing.JList<String> jListListaEspecialidadesDosMedicos;
     private javax.swing.JPanel jPanel1;

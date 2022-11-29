@@ -2,7 +2,14 @@ package br.senai.sp.jandira.dao;
 
 import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.PlanoDeSaude;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MedicosDAO {
@@ -13,8 +20,38 @@ public class MedicosDAO {
     excluir um plano de saude, etc.
     
      */
+    private final static String URL
+            = "C:\\Users\\22282179\\java\\Medico.txt";
+    private final static Path PATH = Paths.get(URL);
+    
+     private final static String URL_TEMP
+            = "C:\\Users\\22282179\\java\\Medico-temp.txt";
+    private final static Path PATH_TEMP = Paths.get(URL_TEMP);
+    
+    
     private static ArrayList<Medico> medico = new ArrayList<>();
 
+   public static void gravar(Medico m){ //CREATE
+       medico.add(m);
+       //** GRAVAR EM ARQUIVO **
+       try {
+           BufferedWriter escritor = Files.newBufferedWriter(
+                    PATH,
+                    StandardOpenOption.APPEND,
+                    StandardOpenOption.WRITE);
+
+            escritor.write(m.getMedicoSepadaradaPorPontoEVirgula());
+            escritor.newLine();
+            escritor.close();
+           
+       } catch (Exception error) {
+           JOptionPane.showMessageDialog(
+                    null,
+                    "OCORREU UM ERRO!!");
+       }
+       
+   }
+     
     public static ArrayList<Medico> getMedico() { // READ
         return medico;
     }
@@ -22,10 +59,9 @@ public class MedicosDAO {
     public static Medico getMedico(Integer codigo) { // READ
 
         for (Medico m : medico) {
-            if (m.getCodigo() == codigo) {
+            if (m.getCodigo().equals(codigo)) {
                 return m;
             }
-
         }
 
         return null;
@@ -41,6 +77,7 @@ public class MedicosDAO {
             }
 
         }
+      //colocar atualizar arquivo aqui
 
     }
 
@@ -53,6 +90,35 @@ public class MedicosDAO {
             }
         }
 
+    }
+    
+    public static void atualizarArquivo(){
+         File arquivoAtual = new File(URL);
+         
+         File arquivoTemp = new File(URL_TEMP);
+         
+         try {
+             arquivoTemp.createNewFile();
+              //Abrir o arquivo temporario para a escrita
+            BufferedWriter bwTemp = Files.newBufferedWriter(
+                    PATH_TEMP,
+                    StandardOpenOption.APPEND,
+                    StandardOpenOption.WRITE);
+            
+             for (Medico m : medico) {
+                bwTemp.write(m.getMedicoSepadaradaPorPontoEVirgula());
+                bwTemp.newLine();
+            }
+              bwTemp.close();
+               //Excluir o arquivo atual
+             arquivoAtual.delete();
+
+            //Renomear o arquivo
+            arquivoTemp.renameTo(arquivoAtual);
+            
+        } catch (Exception ex) {
+             ex.printStackTrace();
+        }
     }
 
     public static void criarListaDeMedico() {

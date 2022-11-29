@@ -113,23 +113,25 @@ public class MedicoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonDeleteMedicosActionPerformed
 
     private void buttonEditarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarMedicosActionPerformed
-//      if(getLinha()!= -1){
-//            editar
-//        }else{
-//            JOptionPane.showMessageDialog(
-//                    this,
-//                    "Por favor,selecione o Médico que você deseje editar",
-//                    "Médicos",
-//                    JOptionPane.WARNING_MESSAGE);     
-//        }
-//        
-//        PlanoDeSaudeDialog planoDeSaudeDialog = new PlanoDeSaudeDialog(null, true,  OperacaoEnum.EDITAR);
-//       // planoDeSaudeDialog.setVisible(true);
-//        preencherTabela();        
+     if(getLinha()!= -1){
+            editarMedico();
+        }else{
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Por favor,selecione o Médico que você deseje editar",
+                    "Médicos",
+                    JOptionPane.WARNING_MESSAGE);     
+        }
+        
+        PlanoDeSaudeDialog planoDeSaudeDialog = new PlanoDeSaudeDialog(null, true,  OperacaoEnum.EDITAR);
+       planoDeSaudeDialog.setVisible(true);
+        preencherTabela();        
     }//GEN-LAST:event_buttonEditarMedicosActionPerformed
 
     private void buttonAdicionarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarMedicosActionPerformed
-        
+     MedicoJDialog medico = new MedicoJDialog(null, true, OperacaoEnum.ADICIONAR);
+     medico.setVisible(true);
+     preencherTabela();
     }//GEN-LAST:event_buttonAdicionarMedicosActionPerformed
       private void preencherTabela(){
       tableMedicos.setModel(MedicosDAO.getTabelaMedicos());
@@ -172,6 +174,17 @@ public class MedicoPanel extends javax.swing.JPanel {
         }   
         
     }
+        private void editarMedico(){
+           
+           Medico medicos = MedicosDAO.getMedico(getCodigo());
+           MedicoJDialog medicoDialog =
+           new MedicoJDialog(null, true,medicos, OperacaoEnum.EDITAR);
+        
+          medicoDialog.setVisible(true);
+           
+           preencherTabela();
+           
+       }
 //         
        
 
