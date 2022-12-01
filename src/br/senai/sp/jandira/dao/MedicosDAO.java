@@ -2,17 +2,23 @@ package br.senai.sp.jandira.dao;
 
 import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.PlanoDeSaude;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MedicosDAO {
+   
 
     /*
     Essa classe será responsável pela persistência de dados
@@ -23,19 +29,18 @@ public class MedicosDAO {
     private final static String URL
             = "C:\\Users\\22282179\\java\\Medico.txt";
     private final static Path PATH = Paths.get(URL);
-    
-     private final static String URL_TEMP
+
+    private final static String URL_TEMP
             = "C:\\Users\\22282179\\java\\Medico-temp.txt";
     private final static Path PATH_TEMP = Paths.get(URL_TEMP);
-    
-    
+
     private static ArrayList<Medico> medico = new ArrayList<>();
 
-   public static void gravar(Medico m){ //CREATE
-       medico.add(m);
-       //** GRAVAR EM ARQUIVO **
-       try {
-           BufferedWriter escritor = Files.newBufferedWriter(
+    public static void gravar(Medico m) { //CREATE
+        medico.add(m);
+        //** GRAVAR EM ARQUIVO **
+        try {
+            BufferedWriter escritor = Files.newBufferedWriter(
                     PATH,
                     StandardOpenOption.APPEND,
                     StandardOpenOption.WRITE);
@@ -43,15 +48,15 @@ public class MedicosDAO {
             escritor.write(m.getMedicoSepadaradaPorPontoEVirgula());
             escritor.newLine();
             escritor.close();
-           
-       } catch (Exception error) {
-           JOptionPane.showMessageDialog(
+
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(
                     null,
                     "OCORREU UM ERRO!!");
-       }
-       
-   }
-     
+        }
+
+    }
+
     public static ArrayList<Medico> getMedico() { // READ
         return medico;
     }
@@ -77,78 +82,100 @@ public class MedicosDAO {
             }
 
         }
-      //colocar atualizar arquivo aqui
-
+       atualizarArquivo();
     }
 
     public static void excluir(Integer codigo) { // DELETE
 
         for (Medico m : medico) {
-            if (m.getCodigo() == codigo) {
+            if (m.getCodigo().equals(codigo))  {
                 medico.remove(m);
                 break;
             }
         }
+        atualizarArquivo();
 
     }
-    
-    public static void atualizarArquivo(){
-         File arquivoAtual = new File(URL);
-         
-         File arquivoTemp = new File(URL_TEMP);
-         
-         try {
-             arquivoTemp.createNewFile();
-              //Abrir o arquivo temporario para a escrita
+
+    public static void atualizarArquivo() {
+        File arquivoAtual = new File(URL);
+
+        File arquivoTemp = new File(URL_TEMP);
+
+        try {
+            arquivoTemp.createNewFile();
+            //Abrir o arquivo temporario para a escrita
             BufferedWriter bwTemp = Files.newBufferedWriter(
                     PATH_TEMP,
                     StandardOpenOption.APPEND,
                     StandardOpenOption.WRITE);
-            
-             for (Medico m : medico) {
+
+            for (Medico m : medico) {
                 bwTemp.write(m.getMedicoSepadaradaPorPontoEVirgula());
                 bwTemp.newLine();
             }
-              bwTemp.close();
-               //Excluir o arquivo atual
-             arquivoAtual.delete();
+            bwTemp.close();
+            //Excluir o arquivo atual
+            arquivoAtual.delete();
 
             //Renomear o arquivo
             arquivoTemp.renameTo(arquivoAtual);
-            
+            bwTemp.close();
+
         } catch (Exception ex) {
-             ex.printStackTrace();
+            ex.printStackTrace();
         }
     }
 
     public static void criarListaDeMedico() {
-        Medico m1 = new Medico("Carol", "(11)4141-6323", "carol@gmail.com", "888-7632-0/");
-        Medico m2 = new Medico("Kevin", "(11)94656788", "kevin@gmail.com", "133344-9/");
-        Medico m3 = new Medico("Laís", "(11)1111-1111", "lais@gmail.com", "1889675-5/");
-        Medico m4 = new Medico("Milena", "(11)95942-5432", "milena@gmail.com", "4545765-4/");
+        try {
+            BufferedReader leitor = Files.newBufferedReader(PATH);
 
-        medico.add(m1);
-        medico.add(m2);
-        medico.add(m3);
-        medico.add(m4);
+            String linha = leitor.readLine();
+            while (linha != null) {
+                String[] vetor = linha.split(";");
 
-        System.out.println(medico.size());
+                String[] data = vetor[5].split("-");
+                Medico m = new Medico(Integer.valueOf(vetor[0]),
+                        vetor[2],
+                        vetor[4],
+                        vetor[3],
+                        vetor[1],
+                        LocalDate.of(Integer.parseInt(data[0]),
+                                Integer.parseInt(data[1]),
+                                Integer.parseInt(data[2])));
+                //guardar o medico na lista
+                medico.add(m);
+                //ler a proxima linha
+                linha = leitor.readLine();
+            }
+
+            leitor.close();
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Ocorreu um erro ao ler o arquivo");
+        }
     }
+  
 
     public static DefaultTableModel getTabelaMedicos() {
 
         System.out.println("teste" + medico.size());
 
-        String[] titulo = {"Codigo", "Nome do médico", "Telefone", "CRM", "Data de Nascimento"};
+        String[] titulo = {"Codigo", "CRM", "NOME", "TELEFONE"};
         String[][] dados = new String[medico.size()][4];
 
         for (Medico m : medico) {
             int i = medico.indexOf(m);
             dados[i][0] = m.getCodigo().toString();
-            dados[i][1] = m.getNome();
-            dados[i][2] = m.getTelefone();
-            dados[i][3] = m.getCrm();
+            dados[i][1] = m.getCrm();
+            dados[i][2] = m.getNome();
+            dados[i][3] = m.getTelefone();
             // celso me ajuda ;( dados[i][4] = m.getDataNascimento();
+            
+            
 
         }
 

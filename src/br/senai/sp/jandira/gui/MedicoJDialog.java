@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.gui;
 
+import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.dao.MedicosDAO;
 import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.OperacaoEnum;
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class MedicoJDialog extends javax.swing.JDialog {
 
@@ -21,6 +23,7 @@ public class MedicoJDialog extends javax.swing.JDialog {
         initComponents();
         this.operacao = operacao;
         preencherTitulo();
+        adicionandoNaList();
     }
 
     public MedicoJDialog(
@@ -191,25 +194,15 @@ public class MedicoJDialog extends javax.swing.JDialog {
         panelDetalhesMedicos.add(labelListaDeEspecialidades);
         labelListaDeEspecialidades.setBounds(30, 140, 150, 16);
 
-        jListListaDeEspecialidades.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         scrollPaneListaDeEspecialidades.setViewportView(jListListaDeEspecialidades);
 
         panelDetalhesMedicos.add(scrollPaneListaDeEspecialidades);
-        scrollPaneListaDeEspecialidades.setBounds(20, 170, 150, 146);
+        scrollPaneListaDeEspecialidades.setBounds(20, 170, 150, 130);
 
-        jListListaEspecialidadesDosMedicos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         scrollEspecialidadesDosMedicos.setViewportView(jListListaEspecialidadesDosMedicos);
 
         panelDetalhesMedicos.add(scrollEspecialidadesDosMedicos);
-        scrollEspecialidadesDosMedicos.setBounds(260, 170, 150, 146);
+        scrollEspecialidadesDosMedicos.setBounds(260, 170, 150, 130);
 
         formattedTextFieldDataDeNascimento.setText("jFormattedTextField1");
         formattedTextFieldDataDeNascimento.addActionListener(new java.awt.event.ActionListener() {
@@ -337,6 +330,8 @@ public class MedicoJDialog extends javax.swing.JDialog {
         dispose();//pra fechar a janela
 
     }
+   
+  
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -366,4 +361,8 @@ public class MedicoJDialog extends javax.swing.JDialog {
     private javax.swing.JTextField textFieldNomeDoMedico;
     private javax.swing.JTextField textFieldTelefone;
     // End of variables declaration//GEN-END:variables
+ private void adicionandoNaList(){ 
+        jListListaDeEspecialidades.setModel(EspecialidadeDAO.getListaEspecialidade());
 }
+}
+

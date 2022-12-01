@@ -118,11 +118,8 @@ public class MedicoPanel extends javax.swing.JPanel {
                     "Por favor,selecione o Médico que você deseje editar",
                     "Médicos",
                     JOptionPane.WARNING_MESSAGE);
-        }
-
-        MedicoJDialog medico = new MedicoJDialog(null, true, OperacaoEnum.EDITAR);
-        medico.setVisible(true);
-        preencherTabela();
+        }      
+        
     }//GEN-LAST:event_buttonEditarMedicosActionPerformed
 
     private void buttonAdicionarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarMedicosActionPerformed
@@ -150,20 +147,15 @@ public class MedicoPanel extends javax.swing.JPanel {
         tableMedicos.getColumnModel().getColumn(1).setPreferredWidth(150);
         tableMedicos.getColumnModel().getColumn(2).setPreferredWidth(330);
         tableMedicos.getColumnModel().getColumn(3).setPreferredWidth(150);
-         tableMedicos.getColumnModel().getColumn(4).setPreferredWidth(100);
+        //tableMedicos.getColumnModel().getColumn(4).setPreferredWidth(100);
     }
 
     private void excluirMedico() {
-        String codigString = tableMedicos.getValueAt(linha, 0).toString();
-        Integer codigo = Integer.valueOf(codigString);
-
         int resposta = JOptionPane.showConfirmDialog(
                 this,
                 "Você confirma a exclusão ?", "Atenção",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
-
-        MedicosDAO.excluir(codigo);
         if (resposta == 0) {
             MedicosDAO.excluir(getCodigo());
             preencherTabela();
