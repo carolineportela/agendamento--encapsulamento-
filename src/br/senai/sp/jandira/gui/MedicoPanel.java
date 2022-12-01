@@ -1,4 +1,3 @@
-
 package br.senai.sp.jandira.gui;
 
 import br.senai.sp.jandira.dao.MedicosDAO;
@@ -7,9 +6,8 @@ import br.senai.sp.jandira.model.OperacaoEnum;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
-
 public class MedicoPanel extends javax.swing.JPanel {
-    
+
     private int linha;
 
     public MedicoPanel() {
@@ -18,19 +16,18 @@ public class MedicoPanel extends javax.swing.JPanel {
         //ajustarTabela();
         preencherTabela();
     }
-    
-     private int getLinha(){
+
+    private int getLinha() {
         linha = tableMedicos.getSelectedRow();
         return linha;
     }
-      
-       private Integer getCodigo(){
+
+    private Integer getCodigo() {
         String codString = tableMedicos.getValueAt(getLinha(), 0).toString();
         Integer codigo = Integer.valueOf(codString);
         return codigo;
-        
-    }     
-    
+
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -101,92 +98,93 @@ public class MedicoPanel extends javax.swing.JPanel {
 
     private void buttonDeleteMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteMedicosActionPerformed
         //pegar a linha e a coluna que está selecionada  e excluir
-         if (getLinha()!=-1){
-             excluirMedico();
-       } else{
-             JOptionPane.showMessageDialog(this,
-                   "Por favor,selecione o Médico que deseja excluir!", 
-                   "Atenção", JOptionPane.WARNING_MESSAGE);
-       }
-       
+        if (getLinha() != -1) {
+            excluirMedico();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor,selecione o Médico que deseja excluir!",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+
 
     }//GEN-LAST:event_buttonDeleteMedicosActionPerformed
 
     private void buttonEditarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarMedicosActionPerformed
-     if(getLinha()!= -1){
+        if (getLinha() != -1) {
             editarMedico();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(
                     this,
                     "Por favor,selecione o Médico que você deseje editar",
                     "Médicos",
-                    JOptionPane.WARNING_MESSAGE);     
+                    JOptionPane.WARNING_MESSAGE);
         }
-        
-        PlanoDeSaudeDialog planoDeSaudeDialog = new PlanoDeSaudeDialog(null, true,  OperacaoEnum.EDITAR);
-       planoDeSaudeDialog.setVisible(true);
-        preencherTabela();        
+
+        MedicoJDialog medico = new MedicoJDialog(null, true, OperacaoEnum.EDITAR);
+        medico.setVisible(true);
+        preencherTabela();
     }//GEN-LAST:event_buttonEditarMedicosActionPerformed
 
     private void buttonAdicionarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarMedicosActionPerformed
-     MedicoJDialog medico = new MedicoJDialog(null, true, OperacaoEnum.ADICIONAR);
-     medico.setVisible(true);
-     preencherTabela();
+        MedicoJDialog medico = new MedicoJDialog(null, true,
+                OperacaoEnum.ADICIONAR); //criando a tela modal de adicionar medicos
+        medico.setVisible(true);//fazendo a tela aparecer quando apertamos o botão adicionar de medicos
+        preencherTabela();
     }//GEN-LAST:event_buttonAdicionarMedicosActionPerformed
-      private void preencherTabela(){
-      tableMedicos.setModel(MedicosDAO.getTabelaMedicos());
-      ajustarTabela();
-      
-  }
-       private void ajustarTabela(){
-      //Impedir o usuario de movimentar as colunas
-       tableMedicos.getTableHeader().setReorderingAllowed(false);
-        
-      //bloquear a edição das células da tabela
-       tableMedicos.setDefaultEditor(Object.class, null);
-       
-       //Definir a largura das colunas
+    private void preencherTabela() {
+        tableMedicos.setModel(MedicosDAO.getTabelaMedicos());
+        ajustarTabela();
+
+    }
+
+    private void ajustarTabela() {
+        //Impedir o usuario de movimentar as colunas
+        tableMedicos.getTableHeader().setReorderingAllowed(false);
+
+        //bloquear a edição das células da tabela
+        tableMedicos.setDefaultEditor(Object.class, null);
+
+        //Definir a largura das colunas
         tableMedicos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tableMedicos.getColumnModel().getColumn(0).setPreferredWidth(100);
         tableMedicos.getColumnModel().getColumn(1).setPreferredWidth(150);
         tableMedicos.getColumnModel().getColumn(2).setPreferredWidth(330);
         tableMedicos.getColumnModel().getColumn(3).setPreferredWidth(150);
-       
-              
-  }
-        private void excluirMedico(){
+         tableMedicos.getColumnModel().getColumn(4).setPreferredWidth(100);
+    }
+
+    private void excluirMedico() {
         String codigString = tableMedicos.getValueAt(linha, 0).toString();
         Integer codigo = Integer.valueOf(codigString);
-        
-        
+
         int resposta = JOptionPane.showConfirmDialog(
-                this, 
+                this,
                 "Você confirma a exclusão ?", "Atenção",
-               JOptionPane.YES_NO_OPTION,
-               JOptionPane.QUESTION_MESSAGE); 
-        
-        
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
         MedicosDAO.excluir(codigo);
-        if(resposta== 0){
+        if (resposta == 0) {
             MedicosDAO.excluir(getCodigo());
             preencherTabela();
-        
-        }   
-        
+
+        }
+
     }
-        private void editarMedico(){
-           
-           Medico medicos = MedicosDAO.getMedico(getCodigo());
-           MedicoJDialog medicoDialog =
-           new MedicoJDialog(null, true,medicos, OperacaoEnum.EDITAR);
-        
-          medicoDialog.setVisible(true);
-           
-           preencherTabela();
-           
-       }
+
+    private void editarMedico() {
+
+        Medico medicos = MedicosDAO.getMedico(getCodigo());
+        MedicoJDialog medicoDialog
+                = new MedicoJDialog(null, true, medicos, OperacaoEnum.EDITAR);
+
+        medicoDialog.setVisible(true);
+
+        preencherTabela();
+
+    }
 //         
-       
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdicionarMedicos;

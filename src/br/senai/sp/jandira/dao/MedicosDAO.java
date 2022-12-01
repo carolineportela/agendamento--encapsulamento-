@@ -139,7 +139,7 @@ public class MedicosDAO {
 
         System.out.println("teste" + medico.size());
 
-        String[] titulo = {"TESTE", "TESTE", "TESTE", "TESTE", "TESTE"};
+        String[] titulo = {"Codigo", "Nome do médico", "Telefone", "CRM", "Data de Nascimento"};
         String[][] dados = new String[medico.size()][4];
 
         for (Medico m : medico) {
@@ -148,6 +148,7 @@ public class MedicosDAO {
             dados[i][1] = m.getNome();
             dados[i][2] = m.getTelefone();
             dados[i][3] = m.getCrm();
+            // celso me ajuda ;( dados[i][4] = m.getDataNascimento();
 
         }
 
