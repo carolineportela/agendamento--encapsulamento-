@@ -118,8 +118,8 @@ public class MedicoPanel extends javax.swing.JPanel {
                     "Por favor,selecione o Médico que você deseje editar",
                     "Médicos",
                     JOptionPane.WARNING_MESSAGE);
-        }      
-        
+        }
+
     }//GEN-LAST:event_buttonEditarMedicosActionPerformed
 
     private void buttonAdicionarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarMedicosActionPerformed

@@ -21,8 +21,11 @@ public class EspecialidadeDAO {
     das especialidades, por exemplo, adicionar uma nova especialidade,
     excluir uma especialidade, etc.
      */
+//    private final static String URL
+//            = "C:\\Users\\22282179\\java\\Especialidade.txt";
+//    private final static Path PATH = Paths.get(URL);
     private final static String URL
-            = "C:\\Users\\22282179\\java\\Especialidade.txt";
+            = "C:\\Users\\lua\\Desktop\\java\\Especialidade.txt";
     private final static Path PATH = Paths.get(URL);
 
     private final static String URL_TEMP
@@ -93,6 +96,14 @@ public class EspecialidadeDAO {
         atualizarAquivo();
 
     }
+     
+//        Especialidade especialidade1 = new Especialidade();
+//        Especialidade especialidade2 = new Especialidade();
+//        Especialidade especialidade3 = new Especialidade(); 
+//        Especialidade especialidade4 = new Especialidade();
+//        Especialidade especialidade5 = new Especialidade();
+       
+
 
     public static void atualizarAquivo() {
         // Passo 1 - Criar uma representação dos arquivos que serão manipulados

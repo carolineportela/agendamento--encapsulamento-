@@ -1,7 +1,7 @@
 package br.senai.sp.jandira.dao;
 
+import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.Medico;
-import br.senai.sp.jandira.model.PlanoDeSaude;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,14 +11,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MedicosDAO {
-   
+
 
     /*
     Essa classe será responsável pela persistência de dados
@@ -26,12 +25,19 @@ public class MedicosDAO {
     excluir um plano de saude, etc.
     
      */
+//   senai private final static String URL
+//            = "C:\\Users\\22282179\\java\\Medico.txt";
+//    private final static Path PATH = Paths.get(URL);
+//
+//    private final static String URL_TEMP
+//            = "C:\\Users\\22282179\\java\\Medico-temp.txt";
+//    private final static Path PATH_TEMP = Paths.get(URL_TEMP)senai;
     private final static String URL
-            = "C:\\Users\\22282179\\java\\Medico.txt";
+            = "C:\\Users\\lua\\Desktop\\java\\Medico.txt";
     private final static Path PATH = Paths.get(URL);
 
     private final static String URL_TEMP
-            = "C:\\Users\\22282179\\java\\Medico-temp.txt";
+            = "C:\\Users\\lua\\Desktop\\java\\Medico-temp.txt";
     private final static Path PATH_TEMP = Paths.get(URL_TEMP);
 
     private static ArrayList<Medico> medico = new ArrayList<>();
@@ -82,13 +88,13 @@ public class MedicosDAO {
             }
 
         }
-       atualizarArquivo();
+        atualizarArquivo();
     }
 
     public static void excluir(Integer codigo) { // DELETE
 
         for (Medico m : medico) {
-            if (m.getCodigo().equals(codigo))  {
+            if (m.getCodigo().equals(codigo)) {
                 medico.remove(m);
                 break;
             }
@@ -158,7 +164,6 @@ public class MedicosDAO {
                     "Ocorreu um erro ao ler o arquivo");
         }
     }
-  
 
     public static DefaultTableModel getTabelaMedicos() {
 
@@ -174,12 +179,54 @@ public class MedicosDAO {
             dados[i][2] = m.getNome();
             dados[i][3] = m.getTelefone();
             // celso me ajuda ;( dados[i][4] = m.getDataNascimento();
-            
-            
 
         }
 
         return new DefaultTableModel(dados, titulo);
     }
+
+//    primeiro codigo public static DefaultListModel<String> getListaDeMedico() {
+//        DefaultListModel<String> listaMedico = new DefaultListModel<>();
+//        for (Medico medico : medico) {
+//            listaMedico.addElement(medico.getCodigo() + " - " + medico.getNome());
+//        }
+//        return listaMedico;
+//    }
+    
+    public static DefaultListModel<Especialidade> getEspecialidadeDoMedicoModel(){
+         
+         DefaultListModel<Especialidade> especialidadeLista = new DefaultListModel<>();
+         try {
+              BufferedReader leitor = Files.newBufferedReader(PATH);
+              String linha = leitor.readLine();
+              
+              for(Especialidade sequenciaListaMedico : apenasEspecialidadeDoMedico(linha)){
+                  especialidadeLista.addElement(sequenciaListaMedico);
+              }
+              leitor.close();
+              
+         } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, "Ocorreu  na adição da lista do médico");
+         }
+         return especialidadeLista;
+     }
+
+    public static ArrayList<Especialidade> apenasEspecialidadeDoMedico(String linha) {
+        String[] vetor = linha.split(";");
+        int codigoEspecialidade = 20;
+
+        ArrayList<Especialidade> codigos = new ArrayList<>();
+        while (codigoEspecialidade < vetor.length) {
+            codigos.add(EspecialidadeDAO.getEspecialidade(Integer.valueOf(vetor(codigoEspecialidade))));
+            codigoEspecialidade++;
+        }
+        return codigos;
+    }
+
+    private static String vetor(int codigoEspecialidade) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    
 
 }
