@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -273,19 +274,19 @@ public class MedicoJDialog extends javax.swing.JDialog {
         CharSequence s = " ";
 
         if (textFieldCRM.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor,digite o número do CRM");
+            JOptionPane.showMessageDialog(this, "Por favor, digite o número do CRM");
             textFieldCRM.requestFocus();
         } else if (textFieldNomeDoMedico.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor,digite o nome do Médico");
+            JOptionPane.showMessageDialog(this, "Por favor, digite o nome do Médico");
             textFieldNomeDoMedico.requestFocus();
         } else if (textFieldTelefone.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor,digite o Telefone do Médico");
+            JOptionPane.showMessageDialog(this, "Por favor, digite o Telefone do Médico");
             textFieldTelefone.requestFocus();
         } else if (textFieldEmail.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor,digite o e-mail do Médico");
+            JOptionPane.showMessageDialog(this, "Por favor, digite o e-mail do Médico");
             textFieldEmail.requestFocus();
         } else if (formattedTextFieldDataDeNascimento.getText().contains(s) == true) {
-            JOptionPane.showMessageDialog(this, "Por favor,digite a Validade do Plano");
+            JOptionPane.showMessageDialog(this, "Por favor, digite a data de nascimento");
             formattedTextFieldDataDeNascimento.requestFocus();
         } else {
             if (operacao == OperacaoEnum.ADICIONAR) {
@@ -296,6 +297,32 @@ public class MedicoJDialog extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_buttonSalvarMedicoActionPerformed
+    //evento do button salvar
+
+    private ArrayList<Especialidade> pegarEspecialidades(JList<String> lista) {
+        int tamanho = lista.getModel().getSize();
+
+        ArrayList<Especialidade> listaNova = new ArrayList();
+
+        for (int i = 0; i < tamanho; i++) {
+
+            int codigo = Integer.valueOf(lista.getModel().getElementAt(i).substring(0, 3));// 100 - Cardiologia
+            Especialidade e = EspecialidadeDAO.getEspecialidade(codigo);
+            listaNova.add(e);
+        }
+        return listaNova;
+    }
+
+    //evento do button editar
+//    private ArrayList<Especialidade> pegarEspecialidadesDoMedico(JList<String> lista2) {
+//        
+//        pegarEspecialidadesDoMedico(lista2) == pegarEspecialidades(lista2).add(e);
+//        ArrayList<Especialidade> listaNova2 = new ArrayList();
+//
+//        Especialidade e = EspecialidadeDAO.getEspecialidade(codigo);
+//
+//    }
+
 
     private void textFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldEmailActionPerformed
         // TODO add your handling code here:
@@ -366,39 +393,37 @@ public class MedicoJDialog extends javax.swing.JDialog {
 //        }
 //        jListListaDeEspecialidades.setModel(listaEspecialidadeMedico);
 
-       int resposta = JOptionPane.showConfirmDialog(
-                this, 
-                "Deseja realmente deletar?", 
-                "Atenção", JOptionPane.YES_NO_OPTION, 
+        int resposta = JOptionPane.showConfirmDialog(
+                this,
+                "Deseja realmente deletar?",
+                "Atenção", JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE);
-        
-        if(resposta == 0){
-        
-            if(jListListaEspecialidadesDosMedicos.isSelectionEmpty() == false){
+
+        if (resposta == 0) {
+
+            if (jListListaEspecialidadesDosMedicos.isSelectionEmpty() == false) {
                 ArrayList<String> novaListaMedicos = new ArrayList<>();
                 int tamanho = jListListaEspecialidadesDosMedicos.getModel().getSize();
-            
-                for(int i = 0; i < tamanho; i++){
+
+                for (int i = 0; i < tamanho; i++) {
                     novaListaMedicos.add(jListListaEspecialidadesDosMedicos.getModel().getElementAt(i));
                 }
                 novaListaMedicos.remove(jListListaEspecialidadesDosMedicos.getSelectedValue());
-            
+
                 DefaultListModel<String> listaEspecialidadeMedicoModel = new DefaultListModel<>();
-                for(String acaoVoltar : novaListaMedicos){
+                for (String acaoVoltar : novaListaMedicos) {
                     listaEspecialidadeMedicoModel.addElement(acaoVoltar);
                 }
                 jListListaEspecialidadesDosMedicos.setModel(listaEspecialidadeMedicoModel);
-            
-            
-            
-            }else{
+
+            } else {
                 JOptionPane.showMessageDialog(
-                    this, 
-                    "Não contém nenhuma especialidade na lista", 
-                    "Editando Médico", 
-                    JOptionPane.WARNING_MESSAGE);
+                        this,
+                        "Não contém nenhuma especialidade na lista",
+                        "Editando Médico",
+                        JOptionPane.WARNING_MESSAGE);
             }
-        
+
         }
 
 
@@ -410,6 +435,7 @@ public class MedicoJDialog extends javax.swing.JDialog {
         medico.setTelefone(textFieldTelefone.getText());
         medico.setEmail(textFieldEmail.getText());
         medico.setDataNascimento(LocalDate.parse(formattedTextFieldDataDeNascimento.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        medico.setEspecialidades(pegarEspecialidades(jListListaDeEspecialidades));
         MedicosDAO.atualizar(medico);
 
         JOptionPane.showMessageDialog(null,
@@ -428,7 +454,7 @@ public class MedicoJDialog extends javax.swing.JDialog {
         novoMedico.setTelefone(textFieldTelefone.getText());
         novoMedico.setEmail(textFieldEmail.getText());
         novoMedico.setDataNascimento(LocalDate.parse(formattedTextFieldDataDeNascimento.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
+        novoMedico.setEspecialidades(pegarEspecialidades(jListListaDeEspecialidades));
         MedicosDAO.gravar(novoMedico);
         JOptionPane.showMessageDialog(this,
                 "Medico gravado com sucesso!",

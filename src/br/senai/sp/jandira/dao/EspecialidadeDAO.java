@@ -21,13 +21,10 @@ public class EspecialidadeDAO {
     das especialidades, por exemplo, adicionar uma nova especialidade,
     excluir uma especialidade, etc.
      */
-//    private final static String URL
-//            = "C:\\Users\\22282179\\java\\Especialidade.txt";
-//    private final static Path PATH = Paths.get(URL);
     private final static String URL
-            = "C:\\Users\\lua\\Desktop\\java\\Especialidade.txt";
+            = "C:\\Users\\22282179\\java\\Especialidade.txt";
     private final static Path PATH = Paths.get(URL);
-
+   
     private final static String URL_TEMP
             = "C:\\Users\\22282179\\java\\Especialidade-temp.txt";
     private final static Path PATH_TEMP = Paths.get(URL_TEMP);

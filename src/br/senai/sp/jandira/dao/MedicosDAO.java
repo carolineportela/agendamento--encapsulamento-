@@ -25,20 +25,22 @@ public class MedicosDAO {
     excluir um plano de saude, etc.
     
      */
-//   senai private final static String URL
-//            = "C:\\Users\\22282179\\java\\Medico.txt";
-//    private final static Path PATH = Paths.get(URL);
-//
-//    private final static String URL_TEMP
-//            = "C:\\Users\\22282179\\java\\Medico-temp.txt";
-//    private final static Path PATH_TEMP = Paths.get(URL_TEMP)senai;
     private final static String URL
-            = "C:\\Users\\lua\\Desktop\\java\\Medico.txt";
+            = "C:\\Users\\22282179\\java\\Medico.txt";
     private final static Path PATH = Paths.get(URL);
 
     private final static String URL_TEMP
-            = "C:\\Users\\lua\\Desktop\\java\\Medico-temp.txt";
+            = "C:\\Users\\22282179\\java\\Medico-temp.txt";
     private final static Path PATH_TEMP = Paths.get(URL_TEMP);
+    
+    
+//   arquivo em casa private final static String URL
+//            = "C:\\Users\\lua\\Desktop\\java\\Medico.txt";
+//    private final static Path PATH = Paths.get(URL);
+//
+//    private final static String URL_TEMP
+//            = "C:\\Users\\lua\\Desktop\\java\\Medico-temp.txt";
+//    private final static Path PATH_TEMP = Paths.get(URL_TEMP)em casa;
 
     private static ArrayList<Medico> medico = new ArrayList<>();
 
